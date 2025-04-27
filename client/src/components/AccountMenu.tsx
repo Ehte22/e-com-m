@@ -43,7 +43,11 @@ const AccountMenu = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            navigate("/")
+            const timeout = setTimeout(() => {
+                window.location.reload()
+            }, 2000)
+
+            return () => clearTimeout(timeout)
         }
     }, [isSuccess])
 

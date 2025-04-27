@@ -90,19 +90,19 @@ const App = () => {
                   <ErrorBoundary>  <Furniture /></ErrorBoundary>}
                 />
                 <Route path="cart" element={
-                  <ErrorBoundary>  <Cart /></ErrorBoundary>}
+                  <Protected roles={["User", "Admin"]} compo={<ErrorBoundary>  <Cart /></ErrorBoundary>} />}
                 />
                 <Route path="checkout" element={
-                  <ErrorBoundary>  <Checkout /></ErrorBoundary>}
+                  <Protected roles={["User", "Admin"]} compo={<ErrorBoundary>  <Checkout /></ErrorBoundary>} />}
                 />
                 <Route path="orders" element={
-                  <ErrorBoundary>  <Orders /></ErrorBoundary>}
+                  <Protected roles={["User", "Admin"]} compo={<ErrorBoundary>  <Orders /></ErrorBoundary>} />}
                 />
                 <Route path="order/success" element={
-                  <ErrorBoundary>  <OrderSuccess /></ErrorBoundary>}
+                  <Protected roles={["User", "Admin"]} compo={<ErrorBoundary>  <OrderSuccess /></ErrorBoundary>} />}
                 />
                 <Route path="profile/:id" element={
-                  <ErrorBoundary>  <Profile /></ErrorBoundary>}
+                  <Protected roles={["User", "Admin"]} compo={<ErrorBoundary>  <Profile /></ErrorBoundary>} />}
                 />
               </Route>
 
