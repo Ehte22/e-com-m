@@ -18,6 +18,7 @@ const Electronics = () => {
     if (isLoading) {
         return <Loader />
     }
+
     return <>
         <Box sx={{ mx: { xs: "32px", sm: "8px", md: "40px", lg: "60px" } }}>
             <Grid2 container >
