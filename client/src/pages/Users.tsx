@@ -36,8 +36,8 @@ const Users = () => {
         { field: 'email', headerName: 'Email', minWidth: 300, flex: 1 },
         { field: 'phone', headerName: 'Phone', minWidth: 170, flex: 0.7 },
         {
-            field: 'image',
-            headerName: 'Image',
+            field: 'profile',
+            headerName: 'Profile',
             minWidth: 100,
             flex: 0.7,
             sortable: false,

@@ -99,7 +99,7 @@ const AdminSidebar = ({ open, setOpen }: { open: boolean, setOpen: (value: boole
         <Drawer sx={{ position: "fixed" }} variant="permanent" open={open}>
             <List>
                 {filteredNavigation.map((item, index) => {
-                    const isActive = location.pathname === item.segment || location.pathname.startsWith(item.segment + "/")
+                    const isActive = location.pathname === item.segment || location.pathname.startsWith(item.segment + "/admin")
 
                     return <ListItem key={index} disablePadding sx={{ display: "block" }}>
                         <ListItemButton

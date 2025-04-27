@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Paper, Chip, } from '@mui/material'
 import { useCancelOrderMutation, useGetOrdersQuery, useReturnOrderRequestedMutation } from '../redux/apis/order.api'
 import Toast from '../components/Toast'
+import Loader from '../components/Loader'
 
 const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
@@ -18,7 +19,7 @@ const textFieldStyles = {
 }
 
 const Orders = () => {
-    const { data } = useGetOrdersQuery({ isFetchAll: true })
+    const { data, isLoading } = useGetOrdersQuery({ isFetchAll: true })
     const [cancelOrder, { data: cancelOrderMessage, isSuccess }] = useCancelOrderMutation()
     const [returnOrder, { data: returnMessage, isSuccess: isReturnRequestSuccess }] = useReturnOrderRequestedMutation()
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -59,6 +60,10 @@ const Orders = () => {
             default:
                 return 'default'
         }
+    }
+
+    if (isLoading) {
+        return <Loader />
     }
 
     return <>
