@@ -8,8 +8,8 @@ import ListItemText from "@mui/material/ListItemText"
 import { CssBaseline, Tooltip, Typography, useMediaQuery } from "@mui/material"
 import { Link, useLocation } from "react-router-dom"
 import DashboardIcon from '@mui/icons-material/Dashboard'
-import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
+import { useSelector } from "react-redux"
 
 const drawerWidth = 320
 const navbarHeight = 64
@@ -57,94 +57,121 @@ const Sidebar = ({ open, setOpen }: { open: boolean, setOpen: (value: boolean) =
 
     const location = useLocation()
 
+    const { token } = useSelector((state: RootState) => state.auth)
+
     const theme = useTheme()
     const isXsScreen = useMediaQuery(theme.breakpoints.down("sm"))
-
-    const { user } = useSelector((state: RootState) => state.auth)
 
     const NAVIGATION = [
         {
             segment: '/',
             title: 'All',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
         {
             segment: '/clothes',
             title: 'Clothes',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
         {
             segment: '/electronics',
             title: 'Electronics',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
         {
             segment: '/toys',
             title: 'Toys',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
         {
             segment: '/furniture',
             title: 'Furniture',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
         {
             segment: '/orders',
             title: 'Orders',
             icon: <DashboardIcon sx={{ fontSize: "20px", color: "#0F766E" }} />,
-            roles: ["Admin", "User"]
         },
     ]
-
-    const filteredNavigation = NAVIGATION.filter(item =>
-        Array.isArray(user?.role) ? item.roles.some(role => user.role.includes(role)) : item.roles.includes(user?.role as string)
-    );
-
 
     return <>
         <CssBaseline />
         <Drawer sx={{ position: "fixed" }} variant="permanent" open={open}>
             <List>
-                {filteredNavigation.map((item, index) => {
+                {NAVIGATION.map((item, index) => {
                     const isActive = location.pathname === item.segment || location.pathname.startsWith(item.segment + "/")
 
                     return <ListItem key={index} disablePadding sx={{ display: "block" }}>
-                        <ListItemButton
-                            component={Link}
-                            to={item.segment}
-                            sx={{
-                                minHeight: 48,
-                                px: 2.5,
-                                justifyContent: open ? "initial" : "center",
-                                backgroundColor: isActive ? "#f0f0f0" : "transparent",
+                        {
+                            item.title === "Orders" && token &&
+                            <ListItemButton
+                                component={Link}
+                                to={item.segment}
+                                sx={{
+                                    minHeight: 48,
+                                    px: 2.5,
+                                    justifyContent: open ? "initial" : "center",
+                                    backgroundColor: isActive ? "#f0f0f0" : "transparent",
 
-                            }}
-                            onClick={() => {
-                                if (isXsScreen) {
-                                    setOpen(false)
-                                }
-                            }}
-                        >
-                            <Tooltip title={item.title}>
-                                <ListItemIcon
-                                    sx={{ minWidth: 0, justifyContent: "center", mr: open ? 3 : "auto" }}>
-                                    {item.icon}
-                                </ListItemIcon>
-                            </Tooltip>
-                            <ListItemText
-                                primary={
-                                    <Typography variant="body1" fontWeight={500}>
-                                        {item.title}
-                                    </Typography>
-                                }
-                                sx={{ opacity: open ? 1 : 0 }}
-                            />
-                        </ListItemButton>
+                                }}
+                                onClick={() => {
+                                    if (isXsScreen) {
+                                        setOpen(false)
+                                    }
+                                }}
+                            >
+                                <Tooltip title={item.title}>
+                                    <ListItemIcon
+                                        sx={{ minWidth: 0, justifyContent: "center", mr: open ? 3 : "auto" }}>
+                                        {item.icon}
+                                    </ListItemIcon>
+                                </Tooltip>
+                                <ListItemText
+                                    primary={
+                                        <Typography variant="body1" fontWeight={500}>
+                                            {item.title}
+                                        </Typography>
+                                    }
+                                    sx={{ opacity: open ? 1 : 0 }}
+                                />
+                            </ListItemButton>
+                        }
+
+                        {
+                            item.title !== "Orders" &&
+                            <ListItemButton
+                                component={Link}
+                                to={item.segment}
+                                sx={{
+                                    minHeight: 48,
+                                    px: 2.5,
+                                    justifyContent: open ? "initial" : "center",
+                                    backgroundColor: isActive ? "#f0f0f0" : "transparent",
+
+                                }}
+                                onClick={() => {
+                                    if (isXsScreen) {
+                                        setOpen(false)
+                                    }
+                                }}
+                            >
+                                <Tooltip title={item.title}>
+                                    <ListItemIcon
+                                        sx={{ minWidth: 0, justifyContent: "center", mr: open ? 3 : "auto" }}>
+                                        {item.icon}
+                                    </ListItemIcon>
+                                </Tooltip>
+                                <ListItemText
+                                    primary={
+                                        <Typography variant="body1" fontWeight={500}>
+                                            {item.title}
+                                        </Typography>
+                                    }
+                                    sx={{ opacity: open ? 1 : 0 }}
+                                />
+                            </ListItemButton>
+                        }
                     </ListItem>
                 })}
             </List>
