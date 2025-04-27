@@ -1,10 +1,12 @@
 Start Client: npm run dev
-.env Client
+
+.env Client:
 VITE_BACKEND_URL=
 VITE_RAZORPAY_API_KEY=
 
 Start Server: nodemon index.ts
-.env Server
+
+.env Server:
 MONGO_URL=
 PORT=
 CLOUDINARY_CLOUD_NAME=
