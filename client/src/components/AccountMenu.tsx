@@ -43,7 +43,7 @@ const AccountMenu = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            window.location.reload()
+            navigate("/")
         }
     }, [isSuccess])
 

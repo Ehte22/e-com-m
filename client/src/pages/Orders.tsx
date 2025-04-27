@@ -18,7 +18,7 @@ const textFieldStyles = {
 }
 
 const Orders = () => {
-    const { data } = useGetOrdersQuery({ isFetchAll: false })
+    const { data } = useGetOrdersQuery({ isFetchAll: true })
     const [cancelOrder, { data: cancelOrderMessage, isSuccess }] = useCancelOrderMutation()
     const [returnOrder, { data: returnMessage, isSuccess: isReturnRequestSuccess }] = useReturnOrderRequestedMutation()
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

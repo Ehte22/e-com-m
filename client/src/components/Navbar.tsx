@@ -12,6 +12,8 @@ import { useGetCartItemsQuery } from '../redux/apis/cart.api';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSearchProduct } from '../context/searchProductContext';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 interface INavbarProps {
     open: boolean
@@ -23,6 +25,8 @@ const Navbar: React.FC<INavbarProps> = ({ open, toggleSideBar }) => {
     const isMediumScreen = useMediaQuery(theme.breakpoints.up("md"))
 
     const { setSearchProduct } = useSearchProduct()
+
+    const { token } = useSelector((state: RootState) => state.auth)
 
     const { data } = useGetCartItemsQuery({ isFetchAll: true })
 
@@ -54,7 +58,7 @@ const Navbar: React.FC<INavbarProps> = ({ open, toggleSideBar }) => {
                                 <Link to="/electronics" style={{ textDecoration: "none", color: "black" }}>Electronics</Link>
                                 <Link to="/toys" style={{ textDecoration: "none", color: "black" }}>Toys</Link>
                                 <Link to="/furniture" style={{ textDecoration: "none", color: "black" }}>Furniture</Link>
-                                <Link to="/orders" style={{ textDecoration: "none", color: "black" }}>Orders</Link>
+                                {token && <Link to="/orders" style={{ textDecoration: "none", color: "black" }}>Orders</Link>}
                             </Box>
                         }
                     </Box>
